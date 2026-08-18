@@ -1,36 +1,73 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# HGD "Stjepan Radić" Žrnovnica
 
-## Getting Started
+A modern, accessible website for Hrvatsko glazbeno društvo "Stjepan Radić" Žrnovnica.
 
-First, run the development server:
+> Status: Work in progress.
+
+## About the project
+
+HGD "Stjepan Radić" was founded in Žrnovnica in 1911 and celebrates its 115th anniversary in 2026.
+
+The website is being created to preserve the orchestra's history, promote upcoming concerts, welcome new musicians, and present clear opportunities for community and partner support.
+
+The public website content will be available in Croatian.
+
+## Project goals
+
+- Present 115 years of musical tradition
+- Promote upcoming concerts and performances
+- Encourage children and adults to join the orchestra
+- Create an interactive historical archive
+- Collect memories and information about archival photographs
+- Present the orchestra's current needs to potential partners
+- Provide accessible contact and application forms
+- Build a strong frontend portfolio project with production-oriented architecture
+
+## Planned features
+
+- Visitor path selector: listen, join, or support
+- Upcoming concert section
+- Calendar event download in `.ics` format
+- Interactive timeline with content filters
+- Living archive submission form
+- Orchestra recruitment section
+- Partnership and support section
+- Video gallery
+- Server-side form handling
+- Responsive and accessible navigation
+- Automated end-to-end testing
+
+## Tech stack
+
+- Next.js App Router
+- React
+- TypeScript
+- Tailwind CSS
+- Motion
+- Server Actions and Route Handlers
+- Playwright
+- Git and GitHub
+
+## Current progress
+
+- [x] Next.js project created
+- [x] TypeScript and ESLint configured
+- [x] Tailwind CSS configured
+- [x] Project color palette added
+- [x] Project fonts added with `next/font`
+- [x] Croatian document language and basic metadata configured
+- [ ] Component architecture
+- [ ] Header and navigation
+- [ ] Hero section
+- [ ] Content sections
+- [ ] Interactive functionality
+- [ ] Server-side forms
+- [ ] Automated tests
+- [ ] Production deployment
+
+## Getting started
+
+Install dependencies:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+npm install

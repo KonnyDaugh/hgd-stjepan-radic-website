@@ -1,5 +1,6 @@
 import { Container } from "../ui/container"; 
 import Image from "next/image";
+import { SectionEyebrow } from "../ui/section-eyebrow";
 
 type HeroProps = {
   title: string;
@@ -24,10 +25,7 @@ export function Hero({title, tagline}: HeroProps) {
             />
             <Container className="relative z-10 pb-20 pt-32 md:pb-28 md:pt-40">
                 <div className="max-w-3xl">
-                    <p className="mb-5 flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-gold">
-                        <span className="h-px w-6 bg-gold" aria-hidden="true" />
-                        Žrnovnica · od 1911.
-                    </p>
+                    <SectionEyebrow>Žrnovnica · od 1911.</SectionEyebrow>
                     <h1 className="font-serif text-5xl font-semibold leading-tight md:text-7xl">{title}</h1>
                     <p className="mt-6 max-w-2xl text-lg leading-relaxed text-cream/80 md:text-xl">{tagline}</p>
                     <div className="mt-8 flex flex-col gap-3 sm:flex-row">

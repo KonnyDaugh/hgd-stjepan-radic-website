@@ -4,9 +4,13 @@ import { statistics } from "@/data/statistics";
 export function StatisticsStrip() {
   return (
     <section
-      className="bg-burgundy text-cream"
+      className="relative overflow-hidden bg-burgundy text-cream"
       aria-label="Statistika orkestra"
     >
+        <div
+            className="staff-lines pointer-events-none absolute inset-0 opacity-50"
+            aria-hidden="true"
+        />
       <Container className="py-12 md:py-16">
         <ul className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
           {statistics.map((statistic) => (

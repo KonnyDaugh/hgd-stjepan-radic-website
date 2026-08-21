@@ -49,3 +49,15 @@ select {
     text-decoration: none;
   }
 }
+
+@layer components {
+  .staff-lines {
+    background-image: repeating-linear-gradient(
+      to bottom,
+      transparent,
+      transparent 14px,
+      rgba(197, 161, 90, 0.15) 14px,
+      rgba(197, 161, 90, 0.15) 15px
+    );
+  }
+}

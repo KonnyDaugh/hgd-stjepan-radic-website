@@ -1,6 +1,7 @@
 import Image from "next/image";
 
 import { Container } from "@/components/ui/container";
+import { SectionEyebrow } from "../ui/section-eyebrow";
 import { upcomingEvent } from "@/data/upcoming-event";
 
 export function UpcomingPerformance() {
@@ -28,6 +29,7 @@ export function UpcomingPerformance() {
         className="scroll-mt-24 bg-white text-charcoal"
         >
         <Container className="py-20 md:py-28">
+            <SectionEyebrow>Sljedeći nastup</SectionEyebrow>
             <h2 className="font-serif text-5xl italic text-burgundy sm:text-6xl lg:text-7xl">
             Vidimo se u prosincu.
             </h2>

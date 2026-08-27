@@ -4,6 +4,7 @@ import {Hero} from "@/components/sections/hero";
 import { StatisticsStrip } from "@/components/sections/statistics-strip";
 import { VisitorPathSelector } from "@/components/sections/visitor-path-selector";
 import { UpcomingPerformance } from "@/components/sections/upcoming-performance";
+import { OrchestraToday } from "@/components/sections/orchestra-today";
 
 export default function Home() {
   return (
@@ -12,8 +13,9 @@ export default function Home() {
       <main className="min-h-screen bg-cream text-charcoal">
         <Hero title={siteConfig.shortName} tagline={siteConfig.tagline} />
         <VisitorPathSelector />
-        <StatisticsStrip />
         <UpcomingPerformance />
+        <StatisticsStrip />
+        <OrchestraToday />
       </main>
     </>
   );

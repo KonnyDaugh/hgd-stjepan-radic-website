@@ -6,6 +6,7 @@ import { VisitorPathSelector } from "@/components/sections/visitor-path-selector
 import { UpcomingPerformance } from "@/components/sections/upcoming-performance";
 import { OrchestraToday } from "@/components/sections/orchestra-today";
 import { ArchiveTimeline } from "@/components/sections/archive-timeline";
+import { LivingArchiveCta } from "@/components/sections/living-archive-cta";
 
 export default function Home() {
   return (
@@ -18,6 +19,7 @@ export default function Home() {
         <StatisticsStrip />
         <OrchestraToday />
         <ArchiveTimeline />
+        <LivingArchiveCta />
       </main>
     </>
   );

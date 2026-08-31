@@ -1,4 +1,11 @@
+'use client';
+
+import { useState } from "react";
+import type { FormEvent } from "react";
+
 import { Container } from "@/components/ui/container";
+
+type ContactInterest = "join" | "partnership";
 
 const contactDetails = [
   {
@@ -24,7 +31,51 @@ const socialPlatforms = ["Facebook", "YouTube", "Instagram"];
 const fieldClassName =
   "mt-2 block w-full min-w-0 rounded border border-gold bg-white px-4 py-3 text-base text-charcoal placeholder:text-charcoal/45 disabled:cursor-not-allowed disabled:opacity-100";
 
+const interestButtonClassName =
+  "inline-flex min-h-11 w-full items-center justify-center rounded border border-burgundy px-4 py-3 text-sm font-semibold text-burgundy transition-colors hover:border-gold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold aria-pressed:bg-burgundy aria-pressed:text-gold sm:w-auto";
+
 export function ContactSection() {
+    const [interest, setInterest] = useState<ContactInterest>("join");
+
+    const [formNotice, setFormNotice] = useState<string | null>(null);
+
+    function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+
+    const formData = new FormData(event.currentTarget);
+
+    const name = String(formData.get("name") ?? "").trim();
+    const replyTo = String(formData.get("replyTo") ?? "").trim();
+    const message = String(formData.get("message") ?? "").trim();
+
+        if (!name || !replyTo || !message) {
+            setFormNotice(
+            "Ispunite sva obavezna polja. Samo razmaci nisu dovoljni.",
+            );
+            return;
+        }
+
+        const isEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(replyTo);
+
+        const phoneDigits = replyTo.replace(/\D/g, "");
+
+        const isPhone =
+        /^\+?[0-9 ()-]+$/.test(replyTo) &&
+        phoneDigits.length >= 7 &&
+        phoneDigits.length <= 15;
+
+        if (!isEmail && !isPhone) {
+            setFormNotice(
+                "Unesite e-mail adresu ili broj telefona u ispravnom obliku.",
+            );
+            return;
+        }
+
+        setFormNotice(
+            "Obavezna polja su popunjena. Poruka nije poslana.",
+        );
+    }
+
   return (
     <section
       id="kontakt"
@@ -45,22 +96,28 @@ export function ContactSection() {
               Razgovarajmo.
             </h2>
 
-            <div className="mt-10 flex flex-wrap gap-3">
-              <button
-                type="button"
-                disabled
-                className="inline-flex min-h-11 w-full items-center justify-center rounded border border-burgundy bg-burgundy px-4 py-3 text-sm font-semibold text-gold disabled:cursor-not-allowed sm:w-auto"
-              >
-                Želim se pridružiti orkestru
-              </button>
+            <div
+                role="group"
+                aria-label="Tema upita"
+                className="mt-10 flex flex-wrap gap-3"
+                >
+                <button
+                    type="button"
+                    aria-pressed={interest === "join"}
+                    onClick={() => setInterest("join")}
+                    className={interestButtonClassName}
+                >
+                    Želim se pridružiti orkestru
+                </button>
 
-              <button
-                type="button"
-                disabled
-                className="inline-flex min-h-11 w-full items-center justify-center rounded border border-burgundy px-4 py-3 text-sm font-semibold text-burgundy disabled:cursor-not-allowed sm:w-auto"
-              >
-                Zanima me partnerstvo
-              </button>
+                <button
+                    type="button"
+                    aria-pressed={interest === "partnership"}
+                    onClick={() => setInterest("partnership")}
+                    className={interestButtonClassName}
+                >
+                    Zanima me partnerstvo
+                </button>
             </div>
 
             <dl className="mt-10 space-y-6">
@@ -100,8 +157,14 @@ export function ContactSection() {
             </dl>
           </div>
 
-          <form aria-label="Kontakt obrazac">
-            <fieldset disabled className="min-w-0 space-y-5">
+          <form 
+                aria-label="Kontakt obrazac"
+                onSubmit={handleSubmit}
+                onInput={() => setFormNotice(null)}>
+            <p className="mb-5 text-sm text-charcoal/70">
+                Sva polja su obavezna. Slanje poruke još nije omogućeno.
+            </p>
+            <fieldset className="min-w-0 space-y-5">
                 <legend className="sr-only">Pošaljite nam poruku</legend>
 
                 <div>
@@ -118,6 +181,7 @@ export function ContactSection() {
                         type="text"
                         autoComplete="name"
                         placeholder="Vaše ime"
+                        required
                         className={fieldClassName}
                     />
                 </div>
@@ -135,6 +199,7 @@ export function ContactSection() {
                         name="replyTo"
                         type="text"
                         placeholder="Kako vas možemo kontaktirati"
+                        required
                         className={fieldClassName}
                     />
                 </div>
@@ -150,12 +215,16 @@ export function ContactSection() {
                     <select
                         id="contact-interest"
                         name="interest"
-                        defaultValue=""
+                        value={interest}
+                        onChange={(event) => {
+                            const value = event.currentTarget.value;
+
+                            if (value === "join" || value === "partnership") {
+                            setInterest(value);
+                            }
+                        }}
                         className={fieldClassName}
-                    >
-                        <option value="" disabled>
-                        Odaberite...
-                        </option>
+                        >
                         <option value="join">Pridruživanje orkestru</option>
                         <option value="partnership">Partnerstvo</option>
                     </select>
@@ -174,6 +243,7 @@ export function ContactSection() {
                         name="message"
                         rows={5}
                         placeholder="Vaša poruka..."
+                        required
                         className={`${fieldClassName} resize-y`}
                     />
                 </div>
@@ -186,6 +256,7 @@ export function ContactSection() {
                         id="contact-consent"
                         name="consent"
                         type="checkbox"
+                        required
                         className="mt-1 h-4 w-4 shrink-0 accent-burgundy disabled:cursor-not-allowed"
                     />
 
@@ -197,13 +268,20 @@ export function ContactSection() {
                 <div className="pt-3">
                     <button
                         type="submit"
-                        disabled
-                        className="inline-flex min-h-11 w-full items-center justify-center rounded bg-burgundy px-6 py-4 text-lg font-semibold text-gold disabled:cursor-not-allowed"
+                        className="inline-flex min-h-11 w-full items-center justify-center rounded bg-burgundy px-6 py-4 text-lg font-semibold text-gold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
                     >
-                        Pošalji poruku
+                        Provjeri podatke
                     </button>
                 </div>
             </fieldset>
+            {formNotice && (
+                <p
+                    role="status"
+                    className="mt-4 rounded border border-gold/40 bg-gold/10 px-4 py-3 text-sm text-burgundy"
+                >
+                    {formNotice}
+                </p>
+            )}
           </form>
         </div>
       </Container>

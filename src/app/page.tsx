@@ -7,6 +7,7 @@ import { UpcomingPerformance } from "@/components/sections/upcoming-performance"
 import { OrchestraToday } from "@/components/sections/orchestra-today";
 import { ArchiveTimeline } from "@/components/sections/archive-timeline";
 import { LivingArchiveCta } from "@/components/sections/living-archive-cta";
+import { JoinOrchestra } from "@/components/sections/join-orchestra";
 
 export default function Home() {
   return (
@@ -20,6 +21,7 @@ export default function Home() {
         <OrchestraToday />
         <ArchiveTimeline />
         <LivingArchiveCta />
+        <JoinOrchestra />
       </main>
     </>
   );

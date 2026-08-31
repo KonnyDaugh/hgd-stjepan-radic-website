@@ -12,6 +12,7 @@ import { SupportOrchestra } from "@/components/sections/support-orchestra";
 import { VideoSection } from "@/components/sections/video-section";
 import { PartnersStrip } from "@/components/sections/partners-strip";
 import { ContactSection } from "@/components/sections/contact-section";
+import { Footer } from "@/components/layout/footer";
 
 export default function Home() {
   return (
@@ -31,6 +32,10 @@ export default function Home() {
         <PartnersStrip />
         <ContactSection />
       </main>
+      <Footer
+        name={siteConfig.shortName}
+        navigation={siteConfig.navigation}
+      />
     </>
   );
 }

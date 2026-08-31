@@ -9,6 +9,7 @@ import { ArchiveTimeline } from "@/components/sections/archive-timeline";
 import { LivingArchiveCta } from "@/components/sections/living-archive-cta";
 import { JoinOrchestra } from "@/components/sections/join-orchestra";
 import { SupportOrchestra } from "@/components/sections/support-orchestra";
+import { VideoSection } from "@/components/sections/video-section";
 
 export default function Home() {
   return (
@@ -24,6 +25,7 @@ export default function Home() {
         <LivingArchiveCta />
         <JoinOrchestra />
         <SupportOrchestra />
+        <VideoSection />
       </main>
     </>
   );

@@ -1,6 +1,13 @@
 import { Container } from "@/components/ui/container";
 import { supportNeeds } from "@/data/support-needs";
 
+const partnerBenefits = [
+  "Ime i logo partnera na web stranici",
+  "Zahvala u koncertnim materijalima",
+  "Javno priznanje na nastupu",
+  "Partnerski logo",
+];
+
 export function SupportOrchestra() {
   return (
     <section
@@ -67,6 +74,54 @@ export function SupportOrchestra() {
             </li>
           ))}
         </ul>
+        <div className="mt-14 grid gap-10 border-t border-gold/20 pt-14 lg:grid-cols-2 lg:items-center lg:gap-16">
+            <div>
+                <h3 className="font-serif text-3xl italic text-gold">
+                Zahvalnost našim partnerima
+                </h3>
+
+                <p className="mt-5 text-sm leading-relaxed italic text-cream/60">
+                Navedene pogodnosti za potvrdu s upravom orkestra prije objave.
+                </p>
+
+                <ul className="mt-6 space-y-3">
+                {partnerBenefits.map((benefit) => (
+                    <li
+                    key={benefit}
+                    className="flex items-start gap-3 text-cream/70"
+                    >
+                    <span
+                        aria-hidden="true"
+                        className="mt-1 text-xs text-gold"
+                    >
+                        ◆
+                    </span>
+
+                    <span>{benefit}</span>
+                    </li>
+                ))}
+                </ul>
+            </div>
+
+            <div className="flex flex-col gap-3">
+                <button
+                type="button"
+                disabled
+                className="inline-flex min-h-11 w-full items-center justify-center rounded bg-gold px-6 py-4 text-center font-semibold text-charcoal disabled:cursor-not-allowed"
+                >
+                Razgovarajmo o partnerstvu
+                </button>
+
+                <button
+                type="button"
+                disabled
+                className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded border border-gold/30 px-6 py-4 text-center text-cream/70 disabled:cursor-not-allowed"
+                >
+                <span aria-hidden="true">↓</span>
+                Preuzmi predstavljanje orkestra
+                </button>
+            </div>
+        </div>
       </Container>
     </section>
   );

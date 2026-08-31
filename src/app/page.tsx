@@ -11,6 +11,7 @@ import { JoinOrchestra } from "@/components/sections/join-orchestra";
 import { SupportOrchestra } from "@/components/sections/support-orchestra";
 import { VideoSection } from "@/components/sections/video-section";
 import { PartnersStrip } from "@/components/sections/partners-strip";
+import { ContactSection } from "@/components/sections/contact-section";
 
 export default function Home() {
   return (
@@ -28,6 +29,7 @@ export default function Home() {
         <SupportOrchestra />
         <VideoSection />
         <PartnersStrip />
+        <ContactSection />
       </main>
     </>
   );

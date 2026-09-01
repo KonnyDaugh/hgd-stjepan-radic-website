@@ -8,7 +8,10 @@ import { Container } from "@/components/ui/container";
 type ContactInterest = "join" | "partnership";
 
 type ContactErrors = {
+  name?: string;
   replyTo?: string;
+  message?: string;
+  consent?: string;
 };
 
 const contactDetails = [
@@ -44,7 +47,11 @@ export function ContactSection() {
     const [formNotice, setFormNotice] = useState<string | null>(null);
 
     const [errors, setErrors] = useState<ContactErrors>({});
+
+    const nameRef = useRef<HTMLInputElement>(null);
     const replyToRef = useRef<HTMLInputElement>(null);
+    const messageRef = useRef<HTMLTextAreaElement>(null);
+    const consentRef = useRef<HTMLInputElement>(null);
 
     function handleSubmit(event: SubmitEvent<HTMLFormElement>) {
         event.preventDefault();
@@ -57,12 +64,42 @@ export function ContactSection() {
         const name = String(formData.get("name") ?? "").trim();
         const replyTo = String(formData.get("replyTo") ?? "").trim();
         const message = String(formData.get("message") ?? "").trim();
+        const consent = formData.get("consent") === "on";
 
-        if (!name || !replyTo || !message) {
-            setFormNotice(
-            "Ispunite sva obavezna polja. Samo razmaci nisu dovoljni.",
-            );
-            return;
+        if (!name) {
+          setErrors({
+            name: "Unesite ime i prezime.",
+          });
+
+          nameRef.current?.focus();
+          return;
+        }
+
+        if (!replyTo) {
+          setErrors({
+            replyTo: "Unesite e-mail adresu ili broj telefona.",
+          });
+
+          replyToRef.current?.focus();
+          return;
+        }
+
+        if (!message) {
+          setErrors({
+            message: "Unesite poruku. Samo razmaci nisu dovoljni.",
+          });
+
+          messageRef.current?.focus();
+          return;
+        }
+
+        if (!consent) {
+          setErrors({
+            consent: "Potvrdite da prihvaćate da vas orkestar kontaktira.",
+          });
+
+          consentRef.current?.focus();
+          return;
         }
 
         const isEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(replyTo);
@@ -171,6 +208,7 @@ export function ContactSection() {
 
           <form 
                 aria-label="Kontakt obrazac"
+                noValidate
                 onSubmit={handleSubmit}
                 onInput={() => setFormNotice(null)}>
             <p className="mb-5 text-sm text-charcoal/70">
@@ -188,14 +226,28 @@ export function ContactSection() {
                     </label>
 
                     <input
+                      ref={nameRef}
                       id="contact-name"
                       name="name"
                       type="text"
                       autoComplete="name"
                       placeholder="Vaše ime"
                       required
-                      className={fieldClassName}
+                      aria-invalid={Boolean(errors.name)}
+                      aria-describedby={errors.name ? "contact-name-error" : undefined}
+                      onChange={() => setErrors({})}
+                      className={`${fieldClassName} aria-invalid:border-red-700`}
                     />
+
+                    {errors.name && (
+                      <p
+                        id="contact-name-error"
+                        role="alert"
+                        className="mt-2 text-sm text-red-700"
+                      >
+                        {errors.name}
+                      </p>
+                    )}
                 </div>
 
                 <div>
@@ -260,31 +312,62 @@ export function ContactSection() {
                     </label>
 
                     <textarea
-                        id="contact-message"
-                        name="message"
-                        rows={5}
-                        placeholder="Vaša poruka..."
-                        required
-                        className={`${fieldClassName} resize-y`}
+                      ref={messageRef}
+                      id="contact-message"
+                      name="message"
+                      rows={5}
+                      placeholder="Vaša poruka..."
+                      required
+                      aria-invalid={Boolean(errors.message)}
+                      aria-describedby={errors.message ? "contact-message-error" : undefined}
+                      onChange={() => setErrors({})}
+                      className={`${fieldClassName} resize-y aria-invalid:border-red-700`}
                     />
+
+                    {errors.message && (
+                      <p
+                        id="contact-message-error"
+                        role="alert"
+                        className="mt-2 text-sm text-red-700"
+                      >
+                        {errors.message}
+                      </p>
+                    )}
                 </div>
 
                 <label
                 htmlFor="contact-consent"
                 className="flex items-start gap-3 text-sm leading-relaxed text-charcoal/75"
                 >
-                    <input
-                        id="contact-consent"
-                        name="consent"
-                        type="checkbox"
-                        required
-                        className="mt-1 h-4 w-4 shrink-0 accent-burgundy disabled:cursor-not-allowed"
-                    />
+                  <input
+                    ref={consentRef}
+                    id="contact-consent"
+                    name="consent"
+                    type="checkbox"
+                    required
+                    aria-invalid={Boolean(errors.consent)}
+                    aria-describedby={
+                      errors.consent ? "contact-consent-error" : undefined
+                    }
+                    onChange={() => setErrors({})}
+                    className="mt-1 h-4 w-4 shrink-0 accent-burgundy aria-invalid:outline-2 aria-invalid:outline-red-700"
+                  />
 
-                    <span>
-                        Prihvaćam da me orkestar kontaktira u vezi s ovim upitom.
-                    </span>
+                  <span>
+                    Prihvaćam da me orkestar kontaktira u vezi s ovim upitom.
+                  </span>
                 </label>
+
+                {errors.consent && (
+                  <p
+                    id="contact-consent-error"
+                    role="alert"
+                    className="mt-2 text-sm text-red-700"
+                  >
+                    {errors.consent}
+                  </p>
+                )}
+                
 
                 <div className="pt-3">
                     <button

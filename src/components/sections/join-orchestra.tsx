@@ -1,6 +1,7 @@
 import Image from "next/image";
 
 import { Container } from "@/components/ui/container";
+import { InstrumentQuiz } from "@/components/ui/instrument-quiz";
 
 const joinSteps = [
   "Javite nam se",
@@ -150,15 +151,9 @@ export function JoinOrchestra() {
                         našeg orkestra.
                     </p>
 
-                    <button
-                        type="button"
-                        disabled
-                        title="Upitnik će biti dostupan uskoro"
-                        className="mt-6 inline-flex min-h-12 w-full items-center justify-center gap-2 rounded border border-burgundy px-6 py-3 font-semibold text-burgundy disabled:cursor-not-allowed sm:w-auto"
-                    >
-                        Otkrij instrument
-                        <span aria-hidden="true">♪</span>
-                    </button>
+                    <div className="mt-6">
+                      <InstrumentQuiz />
+                    </div>
                 </div>
             </div>
         </div>

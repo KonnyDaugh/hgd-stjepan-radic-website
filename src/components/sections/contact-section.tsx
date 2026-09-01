@@ -1,11 +1,15 @@
 'use client';
 
-import { useState } from "react";
 import type { FormEvent } from "react";
+import { useRef, useState } from "react";
 
 import { Container } from "@/components/ui/container";
 
 type ContactInterest = "join" | "partnership";
+
+type ContactErrors = {
+  replyTo?: string;
+};
 
 const contactDetails = [
   {
@@ -39,14 +43,20 @@ export function ContactSection() {
 
     const [formNotice, setFormNotice] = useState<string | null>(null);
 
+    const [errors, setErrors] = useState<ContactErrors>({});
+    const replyToRef = useRef<HTMLInputElement>(null);
+
     function handleSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
+        event.preventDefault();
 
-    const formData = new FormData(event.currentTarget);
+        setErrors({});
+        setFormNotice(null);
 
-    const name = String(formData.get("name") ?? "").trim();
-    const replyTo = String(formData.get("replyTo") ?? "").trim();
-    const message = String(formData.get("message") ?? "").trim();
+        const formData = new FormData(event.currentTarget);
+
+        const name = String(formData.get("name") ?? "").trim();
+        const replyTo = String(formData.get("replyTo") ?? "").trim();
+        const message = String(formData.get("message") ?? "").trim();
 
         if (!name || !replyTo || !message) {
             setFormNotice(
@@ -65,9 +75,11 @@ export function ContactSection() {
         phoneDigits.length <= 15;
 
         if (!isEmail && !isPhone) {
-            setFormNotice(
-                "Unesite e-mail adresu ili broj telefona u ispravnom obliku.",
-            );
+            setErrors({
+                replyTo: "Unesite e-mail adresu ili broj telefona u ispravnom obliku.",
+            });
+
+            replyToRef.current?.focus();
             return;
         }
 
@@ -176,13 +188,13 @@ export function ContactSection() {
                     </label>
 
                     <input
-                        id="contact-name"
-                        name="name"
-                        type="text"
-                        autoComplete="name"
-                        placeholder="Vaše ime"
-                        required
-                        className={fieldClassName}
+                      id="contact-name"
+                      name="name"
+                      type="text"
+                      autoComplete="name"
+                      placeholder="Vaše ime"
+                      required
+                      className={fieldClassName}
                     />
                 </div>
 
@@ -202,6 +214,15 @@ export function ContactSection() {
                         required
                         className={fieldClassName}
                     />
+                    {errors.replyTo && (
+                      <p
+                          id="contact-reply-to-error"
+                          role="alert"
+                          className="mt-2 text-sm text-red-700"
+                      >
+                          {errors.replyTo}
+                      </p>
+                    )}
                 </div>
 
                 <div>

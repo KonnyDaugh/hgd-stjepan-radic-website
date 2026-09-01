@@ -1,6 +1,6 @@
 'use client';
 
-import type { FormEvent } from "react";
+import type { SubmitEvent } from "react";
 import { useRef, useState } from "react";
 
 import { Container } from "@/components/ui/container";
@@ -46,7 +46,7 @@ export function ContactSection() {
     const [errors, setErrors] = useState<ContactErrors>({});
     const replyToRef = useRef<HTMLInputElement>(null);
 
-    function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    function handleSubmit(event: SubmitEvent<HTMLFormElement>) {
         event.preventDefault();
 
         setErrors({});

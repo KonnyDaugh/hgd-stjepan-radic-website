@@ -1,4 +1,5 @@
 import { Container } from "@/components/ui/container";
+import { siteConfig } from "@/data/site";
 
 type FooterProps = {
   name: string;
@@ -53,9 +54,28 @@ export function Footer({ name, navigation }: FooterProps) {
             </h2>
 
             <address className="mt-5 space-y-3 text-sm not-italic text-cream/65">
-              <p className="italic">E-mail: za potvrdu</p>
-              <p className="italic">Telefon: za potvrdu</p>
-              <p>Žrnovnica, Hrvatska</p>
+              <a
+                href={`mailto:${siteConfig.contact.email}`}
+                className="block wrap-break-words italic transition-colors hover:text-gold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
+              >
+                E-mail: {siteConfig.contact.email}
+              </a>
+
+              <a
+                href={siteConfig.contact.phone.href}
+                className="block italic transition-colors hover:text-gold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
+              >
+                Telefon: {siteConfig.contact.phone.label}
+              </a>
+
+              <a
+                href={siteConfig.contact.address.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block transition-colors hover:text-gold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
+              >
+                {siteConfig.contact.address.label}, Hrvatska
+              </a>
             </address>
           </div>
         </div>

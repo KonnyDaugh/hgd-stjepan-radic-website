@@ -4,6 +4,15 @@ import type { SubmitEvent } from "react";
 import { useRef, useState } from "react";
 
 import { Container } from "@/components/ui/container";
+import { siteConfig } from "@/data/site";
+
+
+type ContactDetail = {
+  label: string;
+  value: string;
+  href?: string;
+  external?: boolean;
+};
 
 type ContactInterest = "join" | "partnership";
 
@@ -14,26 +23,28 @@ type ContactErrors = {
   consent?: string;
 };
 
-const contactDetails = [
+const contactDetails: ContactDetail[] = [
   {
     label: "E-mail",
-    value: "Adresa za potvrdu",
+    value: siteConfig.contact.email,
+    href: `mailto:${siteConfig.contact.email}`,
   },
   {
     label: "Telefon",
-    value: "Broj za potvrdu",
+    value: siteConfig.contact.phone.label,
+    href: siteConfig.contact.phone.href,
   },
   {
     label: "Adresa probe",
-    value: "Žrnovnica — za potvrdu",
+    value: siteConfig.contact.address.label,
+    href: siteConfig.contact.address.href,
+    external: true,
   },
   {
     label: "Kontakt osoba",
-    value: "Ime za potvrdu",
+    value: "Goran Kovačević",
   },
 ];
-
-const socialPlatforms = ["Facebook", "YouTube", "Instagram"];
 
 const fieldClassName =
   "mt-2 block w-full min-w-0 rounded border border-gold bg-white px-4 py-3 text-base text-charcoal placeholder:text-charcoal/45 disabled:cursor-not-allowed disabled:opacity-100";
@@ -177,7 +188,18 @@ export function ContactSection() {
                   </dt>
 
                   <dd className="mt-2 italic text-burgundy">
-                    {detail.value}
+                    {detail.href ? (
+                      <a
+                        href={detail.href}
+                        target={detail.external ? "_blank" : undefined}
+                        rel={detail.external ? "noopener noreferrer" : undefined}
+                        className="transition-colors hover:text-gold"
+                      >
+                        {detail.value}
+                      </a>
+                    ) : (
+                      detail.value
+                    )}
                   </dd>
                 </div>
               ))}
@@ -189,15 +211,16 @@ export function ContactSection() {
 
                 <dd className="mt-3">
                   <ul className="flex flex-wrap gap-2">
-                    {socialPlatforms.map((platform) => (
-                      <li key={platform}>
-                        <button
-                          type="button"
-                          disabled
-                          className="inline-flex min-h-11 items-center justify-center rounded border border-gold px-3 py-2 text-sm text-burgundy disabled:cursor-not-allowed"
+                    {siteConfig.socialLinks.map((socialLink) => (
+                      <li key={socialLink.href}>
+                        <a
+                          href={socialLink.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex min-h-11 items-center justify-center rounded border border-gold px-3 py-2 text-sm text-burgundy transition-colors hover:bg-gold hover:text-burgundy focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
                         >
-                          {platform}
-                        </button>
+                          {socialLink.label}
+                        </a>
                       </li>
                     ))}
                   </ul>

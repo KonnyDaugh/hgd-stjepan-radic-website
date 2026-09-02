@@ -2,6 +2,7 @@ import Image from "next/image";
 
 import { Container } from "@/components/ui/container";
 import { InstrumentQuiz } from "@/components/ui/instrument-quiz";
+import { siteConfig } from "@/data/site";
 
 const joinSteps = [
   "Javite nam se",
@@ -76,7 +77,14 @@ export function JoinOrchestra() {
                 </dt>
 
                 <dd className="mt-2 text-burgundy">
-                  Za potvrdu
+                  <a
+                    href={siteConfig.contact.address.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-block rounded underline decoration-gold/50 underline-offset-4 transition-colors hover:text-gold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
+                  >
+                    {siteConfig.contact.address.label}
+                  </a>
                 </dd>
               </div>
 
@@ -86,10 +94,14 @@ export function JoinOrchestra() {
                 </dt>
 
                 <dd className="mt-2 text-burgundy">
-                  Za potvrdu
+                  {siteConfig.rehearsal.schedule}
                 </dd>
               </div>
             </dl>
+
+            <p className="mt-4 text-sm italic text-charcoal/65">
+              {siteConfig.rehearsal.attendanceNote}
+            </p>
 
             <ul
               className="mt-8 flex flex-wrap gap-2"
@@ -131,14 +143,12 @@ export function JoinOrchestra() {
                         svirači svih instrumenata.
                     </p>
 
-                    <button
-                        type="button"
-                        disabled
-                        title="Prijava će biti dostupna uskoro"
-                        className="mt-8 inline-flex min-h-14 w-full items-center justify-center rounded bg-gold px-6 py-3 font-semibold text-charcoal disabled:cursor-not-allowed sm:w-auto"
+                    <a
+                      href="#kontakt"
+                      className="mt-8 inline-flex min-h-14 w-full items-center justify-center rounded bg-gold px-6 py-3 font-semibold text-charcoal sm:w-auto"
                     >
-                        Prijavi dolazak na probu
-                    </button>
+                      Prijavi dolazak na probu
+                    </a>
                 </div>
 
                 <div className="rounded-2xl border border-gold bg-cream p-6 sm:p-8">

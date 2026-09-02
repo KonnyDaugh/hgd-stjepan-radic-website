@@ -43,4 +43,10 @@ export const siteConfig = {
       href: "https://www.youtube.com/@limenaglazbazrnovnica9255",
     },
   ],
+
+  rehearsal: {
+    schedule: "Utorkom i petkom u 19:45",
+    attendanceNote:
+      "Probu možete posjetiti i bez prethodne najave.",
+  },
 } as const;

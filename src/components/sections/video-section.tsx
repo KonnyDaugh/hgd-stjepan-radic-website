@@ -1,10 +1,29 @@
+"use client";
+
 import Image from "next/image";
+import { useRef, useState } from "react";
 
 import { Container } from "@/components/ui/container";
-import { videos } from "@/data/videos";
+import { videos, type VideoPreview } from "@/data/videos";
 
 export function VideoSection() {
   const featuredVideo = videos.find((video) => video.featured);
+  const secondaryVideos = videos.filter((video) => !video.featured);
+
+  const dialogRef = useRef<HTMLDialogElement>(null);
+
+  const [selectedVideo, setSelectedVideo] =
+    useState<VideoPreview | null>(null);
+
+  function openVideo(video: VideoPreview) {
+    setSelectedVideo(video);
+    dialogRef.current?.showModal();
+  }
+
+  function closeVideo() {
+    dialogRef.current?.close();
+    setSelectedVideo(null);
+  }
 
   return (
     <section
@@ -28,8 +47,8 @@ export function VideoSection() {
         {featuredVideo && (
             <button
                 type="button"
-                disabled
-                className="relative mt-12 block w-full overflow-hidden rounded-xl bg-white text-left disabled:cursor-not-allowed"
+                onClick={() => openVideo(featuredVideo)}
+                className="relative mt-12 block w-full overflow-hidden rounded-xl bg-white text-left"
             >
                 <span className="relative flex aspect-video items-center justify-center bg-burgundy">
                 <Image
@@ -71,16 +90,16 @@ export function VideoSection() {
             </button>
         )}
 
-        <ul className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {videos.map((video) => (
+        <ul className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {secondaryVideos.map((video) => (
             <li
               key={video.id}
               className="overflow-hidden rounded-xl bg-white"
             >
               <button
                 type="button"
-                disabled
-                className="block h-full w-full text-left disabled:cursor-not-allowed"
+                onClick={() => openVideo(video)}
+                className="block h-full w-full text-left"
               >
                 <span className="relative flex aspect-video items-center justify-center bg-burgundy">
                   <Image
@@ -121,6 +140,48 @@ export function VideoSection() {
             </li>
           ))}
         </ul>
+        <dialog
+          ref={dialogRef}
+          aria-labelledby="video-dialog-title"
+          onClose={() => setSelectedVideo(null)}
+          onClick={(event) => {
+            if (event.target === event.currentTarget) {
+              closeVideo();
+            }
+          }}
+          className="m-auto w-[calc(100%-2rem)] max-w-4xl overflow-hidden rounded-xl bg-charcoal p-0 text-cream backdrop:bg-charcoal/85"
+        >
+          <div className="flex items-center justify-between gap-4 border-b border-cream/15 px-5 py-4">
+            <h3
+              id="video-dialog-title"
+              className="font-serif text-xl"
+            >
+              {selectedVideo?.title}
+            </h3>
+
+            <button
+              type="button"
+              onClick={closeVideo}
+              aria-label="Zatvori video"
+              className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-cream/30 text-2xl transition-colors hover:border-gold hover:text-gold"
+            >
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+
+          {selectedVideo && (
+            <div className="aspect-video bg-black">
+              <iframe
+                src={`https://www.youtube-nocookie.com/embed/${selectedVideo.youtubeId}?playsinline=1`}
+                title={selectedVideo.title}
+                className="h-full w-full"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerPolicy="strict-origin-when-cross-origin"
+                allowFullScreen
+              />
+            </div>
+          )}
+        </dialog>
       </Container>
     </section>
   );

@@ -3,27 +3,25 @@ export type VideoPreview = {
   title: string;
   year: number | null;
   poster: string;
+  youtubeId: string;
   featured?: boolean;
 };
 
 export const videos: VideoPreview[] = [
   {
-    id: "performance",
-    title: "Nastup — naziv za potvrdu",
-    year: null,
+    id: "documentary-2022",
+    title:
+      'Dokumentarni film — "HGD Stjepan Radić — Limena glazba Žrnovnica"',
+    year: 2022,
     poster: "/images/orchestra-today-main.webp",
+    youtubeId: "Jtn9rKyj8k8",
     featured: true,
   },
   {
-    id: "annual-concert",
-    title: "Godišnji koncert — za potvrdu",
-    year: null,
-    poster: "/images/next-performance.webp",
-  },
-  {
-    id: "rehearsal",
-    title: "Proba — za potvrdu",
-    year: null,
+    id: "110-years",
+    title: "110 godina limene glazbe u Žrnovnici",
+    year: 2022,
     poster: "/images/orchestra-today-detail-1.webp",
-  },
+    youtubeId: "Lnr5hoQ7kms",
+  }
 ];

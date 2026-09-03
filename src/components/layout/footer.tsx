@@ -1,5 +1,6 @@
 import { Container } from "@/components/ui/container";
 import { siteConfig } from "@/data/site";
+import Link from "next/link";
 
 type FooterProps = {
   name: string;
@@ -85,13 +86,12 @@ export function Footer({ name, navigation }: FooterProps) {
             © 2026 {name} Žrnovnica. Sva prava pridržana.
           </p>
 
-          <button
-            type="button"
-            disabled
-            className="min-h-11 shrink-0 self-start text-left disabled:cursor-not-allowed sm:self-auto"
+          <Link
+            href="/pravila-privatnosti"
+            className="inline-flex min-h-11 items-center rounded transition-colors hover:text-gold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
           >
             Pravila privatnosti
-          </button>
+          </Link>
         </div>
       </Container>
     </footer>

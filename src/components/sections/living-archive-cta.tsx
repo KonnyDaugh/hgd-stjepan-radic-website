@@ -1,6 +1,14 @@
+"use client";
+
+import { useState } from "react";
+
+import {ArchiveContributionModal, type ContributionType } from "@/components/archive/archive-contribution-modal";
+
 import { Container } from "@/components/ui/container";
 
 export function LivingArchiveCta() {
+  const [contributionType, setContributionType] = useState<ContributionType | null>(null);
+
   return (
     <section
       id="zivuci-arhiv"
@@ -32,21 +40,19 @@ export function LivingArchiveCta() {
               pošaljite nam svoje sjećanje.
             </p>
 
-            <div className="mt-10 flex flex-col gap-4 sm:flex-row">
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <button
                 type="button"
-                disabled
-                title="Funkcionalnost će biti dostupna uskoro"
-                className="inline-flex min-h-14 items-center justify-center rounded bg-gold px-8 font-semibold text-charcoal disabled:cursor-not-allowed"
+                onClick={() => setContributionType("recognition")}
+                className="inline-flex min-h-12 items-center justify-center rounded bg-gold px-6 py-3 font-semibold text-charcoal transition-colors hover:bg-cream focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
               >
                 Prepoznajem nekoga
               </button>
 
               <button
                 type="button"
-                disabled
-                title="Funkcionalnost će biti dostupna uskoro"
-                className="inline-flex min-h-14 items-center justify-center rounded border border-cream/35 px-8 font-semibold text-cream disabled:cursor-not-allowed"
+                onClick={() => setContributionType("memory")}
+                className="inline-flex min-h-12 items-center justify-center rounded border border-cream/40 px-6 py-3 font-semibold text-cream transition-colors hover:border-gold hover:text-gold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
               >
                 Podijeli uspomenu
               </button>
@@ -54,6 +60,11 @@ export function LivingArchiveCta() {
           </div>
         </div>
       </Container>
+      <ArchiveContributionModal
+        key={contributionType ?? "closed"}
+        type={contributionType}
+        onClose={() => setContributionType(null)}
+      />
     </section>
   );
 }

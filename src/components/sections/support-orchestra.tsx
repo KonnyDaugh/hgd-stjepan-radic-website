@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import type { SubmitEventHandler } from "react";
+import { useState } from "react";
+
 
 import {
   SupportModal,
@@ -16,39 +16,6 @@ const partnerBenefits = [
   "Zahvala u koncertnim materijalima",
   "Javno priznanje na nastupu",
   "Partnerski logo",
-];
-
-type HelpType =
-  | "financial"
-  | "equipment"
-  | "partnership"
-  | "other";
-
-const helpTypes: Array<{
-  id: HelpType;
-  label: string;
-  description: string;
-}> = [
-  {
-    id: "financial",
-    label: "Financijska donacija",
-    description: "Želim financijski podržati odabrani cilj.",
-  },
-  {
-    id: "equipment",
-    label: "Oprema ili usluga",
-    description: "Mogu ponuditi instrument, popravak, prijevoz ili drugu uslugu.",
-  },
-  {
-    id: "partnership",
-    label: "Partnerstvo ili sponzorstvo",
-    description: "Predstavljam organizaciju zainteresiranu za suradnju.",
-  },
-  {
-    id: "other",
-    label: "Drugi način pomoći",
-    description: "Imam drugi prijedlog za podršku orkestru.",
-  },
 ];
 
 export function SupportOrchestra() {
@@ -155,22 +122,21 @@ export function SupportOrchestra() {
             </div>
 
             <div className="flex flex-col gap-3">
-                <button
-                type="button"
-                disabled
+                <a
+                href="#kontakt"
                 className="inline-flex min-h-11 w-full items-center justify-center rounded bg-gold px-6 py-4 text-center font-semibold text-charcoal disabled:cursor-not-allowed"
                 >
                 Razgovarajmo o partnerstvu
-                </button>
+                </a>
 
-                <button
-                type="button"
-                disabled
-                className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded border border-gold/30 px-6 py-4 text-center text-cream/70 disabled:cursor-not-allowed"
+                <a
+                  href="/documents/hgd-stjepan-radic-predstavljanje.pdf"
+                  download
+                  className="inline-flex min-h-14 w-full items-center justify-center gap-2 rounded border border-gold/50 px-6 py-3 text-center font-semibold text-cream transition-colors hover:border-gold hover:text-gold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
                 >
-                <span aria-hidden="true">↓</span>
-                Preuzmi predstavljanje orkestra
-                </button>
+                  <span aria-hidden="true">↓</span>
+                  Preuzmi predstavljanje orkestra
+                </a>
             </div>
         </div>
       </Container>

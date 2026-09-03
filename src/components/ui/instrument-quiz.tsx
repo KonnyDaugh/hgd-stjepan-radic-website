@@ -199,73 +199,62 @@ export function InstrumentQuiz() {
             </div>
             ) : (
             <div className="mt-8 rounded-xl border border-gold/50 bg-white p-6">
-                <p className="text-sm font-semibold text-gold">
+              <p className="text-sm font-semibold text-gold">
                 Pitanje {currentQuestionIndex + 1} od{" "}
                 {instrumentQuizQuestions.length}
-                </p>
+              </p>
 
-                <fieldset className="mt-5">
-                    <legend className="font-serif text-2xl text-burgundy">
-                    {currentQuestion.prompt}
-                    </legend>
+              <fieldset className="mt-5">
+                <legend className="font-serif text-2xl text-burgundy">
+                  {currentQuestion.prompt}
+                </legend>
 
-                    <div className="mt-6 grid gap-3">
-                    {currentQuestion.options.map((option) => (
-                        <label
-                        key={option.id}
-                        className="block cursor-pointer"
-                        >
-                        <input
-                            type="radio"
-                            name={currentQuestion.id}
-                            value={option.id}
-                            checked={selectedOptionId === option.id}
-                            onChange={() => selectOption(option.id)}
-                            className="peer sr-only"
-                        />
+                <div className="mt-6 grid gap-3">
+                  {currentQuestion.options.map((option) => (
+                    <label
+                      key={option.id}
+                      className="block cursor-pointer"
+                    >
+                      <input
+                        type="radio"
+                        name={currentQuestion.id}
+                        value={option.id}
+                        checked={selectedOptionId === option.id}
+                        onChange={() => selectOption(option.id)}
+                        className="peer sr-only"
+                      />
 
-                        <span className="block rounded border border-gold/50 bg-cream px-4 py-3 text-burgundy transition-colors peer-checked:border-burgundy peer-checked:bg-burgundy peer-checked:text-gold peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-gold">
-                            {option.label}
-                        </span>
-                        </label>
-                    ))}
-                    </div>
-                </fieldset>
+                      <span className="block rounded border border-gold/50 bg-cream px-4 py-3 text-burgundy transition-colors peer-checked:border-burgundy peer-checked:bg-burgundy peer-checked:text-gold peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-gold">
+                        {option.label}
+                      </span>
+                    </label>
+                  ))}
+                </div>
+              </fieldset>
             </div>
             )}
 
-            <div className="mt-6 flex items-center justify-between gap-4">
+            {!showResult && (
+              <div className="mt-6 flex items-center justify-between gap-4">
                 <button
-                    type="button"
-                    onClick={goToPreviousStep}
-                    disabled={!showResult && isFirstQuestion}
-                    className="inline-flex min-h-11 items-center justify-center rounded border border-burgundy px-5 py-3 font-semibold text-burgundy disabled:cursor-not-allowed disabled:opacity-40"
+                  type="button"
+                  onClick={goToPreviousStep}
+                  disabled={isFirstQuestion}
+                  className="inline-flex min-h-11 items-center justify-center rounded border border-burgundy px-5 py-3 font-semibold text-burgundy disabled:cursor-not-allowed disabled:opacity-40"
                 >
-                    Natrag
+                  Natrag
                 </button>
 
-                {!showResult && (
-                    <div className="mt-6 flex items-center justify-between gap-4">
-                        <button
-                        type="button"
-                        onClick={goToPreviousStep}
-                        disabled={isFirstQuestion}
-                        className="inline-flex min-h-11 items-center justify-center rounded border border-burgundy px-5 py-3 font-semibold text-burgundy disabled:cursor-not-allowed disabled:opacity-40"
-                        >
-                        Natrag
-                        </button>
-
-                        <button
-                        type="button"
-                        onClick={goToNextStep}
-                        disabled={!selectedOptionId}
-                        className="inline-flex min-h-11 items-center justify-center rounded bg-burgundy px-5 py-3 font-semibold text-gold disabled:cursor-not-allowed disabled:opacity-40"
-                        >
-                        {isLastQuestion ? "Prikaži rezultat" : "Dalje"}
-                        </button>
-                    </div>
-                    )}
-                </div>
+                <button
+                  type="button"
+                  onClick={goToNextStep}
+                  disabled={!selectedOptionId}
+                  className="inline-flex min-h-11 items-center justify-center rounded bg-burgundy px-5 py-3 font-semibold text-gold disabled:cursor-not-allowed disabled:opacity-40"
+                >
+                  {isLastQuestion ? "Prikaži rezultat" : "Dalje"}
+                </button>
+              </div>
+            )}
 
           <p className="mt-6 text-sm leading-relaxed text-charcoal/65">
             Rezultat je zabavna preporuka. Instrument ćete najbolje

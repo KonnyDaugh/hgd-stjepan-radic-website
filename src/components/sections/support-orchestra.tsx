@@ -1,3 +1,13 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import type { SubmitEventHandler } from "react";
+
+import {
+  SupportModal,
+  type SupportModalItem,
+} from "@/components/support/support-modal";
+
 import { Container } from "@/components/ui/container";
 import { supportNeeds } from "@/data/support-needs";
 
@@ -8,7 +18,43 @@ const partnerBenefits = [
   "Partnerski logo",
 ];
 
+type HelpType =
+  | "financial"
+  | "equipment"
+  | "partnership"
+  | "other";
+
+const helpTypes: Array<{
+  id: HelpType;
+  label: string;
+  description: string;
+}> = [
+  {
+    id: "financial",
+    label: "Financijska donacija",
+    description: "Želim financijski podržati odabrani cilj.",
+  },
+  {
+    id: "equipment",
+    label: "Oprema ili usluga",
+    description: "Mogu ponuditi instrument, popravak, prijevoz ili drugu uslugu.",
+  },
+  {
+    id: "partnership",
+    label: "Partnerstvo ili sponzorstvo",
+    description: "Predstavljam organizaciju zainteresiranu za suradnju.",
+  },
+  {
+    id: "other",
+    label: "Drugi način pomoći",
+    description: "Imam drugi prijedlog za podršku orkestru.",
+  },
+];
+
 export function SupportOrchestra() {
+  const [selectedSupportItem, setSelectedSupportItem] =
+  useState<SupportModalItem | null>(null);
+
   return (
     <section
       id="podrzi"
@@ -65,7 +111,12 @@ export function SupportOrchestra() {
 
                 <button
                   type="button"
-                  disabled
+                  onClick={() =>
+                    setSelectedSupportItem({
+                      title: need.title,
+                      description: need.description,
+                    })
+  }
                   className="mt-5 inline-flex min-h-11 w-full items-center justify-center rounded border border-gold px-5 py-3 font-semibold text-burgundy disabled:cursor-not-allowed sm:w-auto"
                 >
                   Želim pomoći
@@ -123,6 +174,11 @@ export function SupportOrchestra() {
             </div>
         </div>
       </Container>
+      <SupportModal
+        key={selectedSupportItem?.title ?? "closed"}
+        item={selectedSupportItem}
+        onClose={() => setSelectedSupportItem(null)}
+      />
     </section>
   );
 }

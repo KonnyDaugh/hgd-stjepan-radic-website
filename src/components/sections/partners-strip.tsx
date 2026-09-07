@@ -33,13 +33,13 @@ export function PartnersStrip() {
           ))}
         </ul>
 
-        <button
-          type="button"
-          disabled
+        <a
+          href="#kontakt"
           className="mt-8 inline-flex min-h-11 items-center justify-center rounded border border-burgundy px-5 py-3 font-semibold disabled:cursor-not-allowed"
-        >
+          >
           Postanite partner
-        </button>
+        </a>
+    
       </Container>
     </section>
   );

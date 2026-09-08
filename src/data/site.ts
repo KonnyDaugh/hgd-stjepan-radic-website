@@ -8,6 +8,7 @@ export const siteConfig = {
   navigation: [
     { label: "Početna", href: "#hero" },
     { label: "Koncerti", href: "#dogadanja" },
+    { label: "Novosti", href: "#novosti" },
     { label: "115 godina", href: "#115-godina" },
     { label: "O nama", href: "#o-nama" },
     { label: "Pridruži se", href: "#pridruzi-se" },

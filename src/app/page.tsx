@@ -13,6 +13,7 @@ import { VideoSection } from "@/components/sections/video-section";
 import { PartnersStrip } from "@/components/sections/partners-strip";
 import { ContactSection } from "@/components/sections/contact-section";
 import { Footer } from "@/components/layout/footer";
+import NewsSection from "@/components/sections/news-section";
 
 export default function Home() {
   return (
@@ -29,6 +30,7 @@ export default function Home() {
         <JoinOrchestra />
         <SupportOrchestra />
         <VideoSection />
+        <NewsSection />
         <PartnersStrip />
         <ContactSection />
       </main>

@@ -102,8 +102,21 @@ export function ArchiveTimeline() {
                     aria-hidden="true"
                   />
 
-                  <p className="font-serif text-4xl text-gold">
-                    {year ?? "Nedatirano"}
+                  <p
+                    className={`font-serif text-gold ${
+                      year === null
+                        ? "text-2xl leading-tight"
+                        : "text-4xl"
+                    }`}
+                  >
+                    {year === null ? (
+                      <>
+                        <span className="block">Bez</span>
+                        <span className="block">datuma</span>
+                      </>
+                    ) : (
+                      year
+                    )}
                   </p>
 
                   <div className="space-y-8">
@@ -112,9 +125,11 @@ export function ArchiveTimeline() {
                         key={entry.id}
                         className="overflow-hidden rounded-lg border border-gold/50 bg-cream"
                       >
-                        <div className="relative aspect-4/3 overflow-hidden sm:aspect-16/6 lg:aspect-5/1">
-                          <ArchiveGallery images={entry.images} />
-                        </div>
+                        {entry.images.length > 0 && (
+                          <div className="relative aspect-4/3 overflow-hidden sm:aspect-16/6 lg:aspect-5/1">
+                            <ArchiveGallery images={entry.images} />
+                          </div>
+                        )}
 
                         <div className="p-6 sm:p-8">
                           <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2">

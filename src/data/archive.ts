@@ -78,6 +78,22 @@ const imotski2026Images: ArchiveImage[] = Array.from(
   },
 );
 
+const trogir2026Images: ArchiveImage[] = Array.from(
+  { length: 17 },
+  (_, index) => {
+    const photoNumber = String(index + 1).padStart(2, "0");
+
+    return {
+      src: `/images/archive/events/trogir-2026/photo-${photoNumber}.jpg`,
+      alt: `Zajednički koncert Narodne glazbe Trogir i HGD-a Stjepan Radić, fotografija ${
+        index + 1
+      }`,
+      caption:
+        "Prvi zajednički koncert Narodne glazbe Trogir i HGD-a „Stjepan Radić“ u Gradskoj loži u Trogiru.",
+    };
+  },
+);
+
 export const archiveEntries: ArchiveEntry[] = [
   {
     id: "osnivanje-drustva",
@@ -87,7 +103,7 @@ export const archiveEntries: ArchiveEntry[] = [
     title: "Osnivanje društva",
     description:
       "Hrvatsko glazbeno društvo „Stjepan Radić“ osnovano je 1911. godine u Žrnovnici. Točne okolnosti osnivanja bit će dopunjene nakon provjere arhivske građe.",
-      images: [],
+    images: [],
   },
   {
     id: "arhivska-fotografija-1",
@@ -132,6 +148,28 @@ export const archiveEntries: ArchiveEntry[] = [
     ],
   },
   {
+    id: "zrnovacki-glazbari-1939",
+    year: 1939,
+    date: "1939-12-01",
+    categories: ["fotografije", "ljudi"],
+    eyebrow: "Fotografije · Glazbari",
+    title: "Žrnovački glazbari 1939. godine",
+    description:
+      "Zajednička fotografija žrnovačkih glazbara snimljena je 1. prosinca 1939. godine. Članovi orkestra poziraju s puhačkim i udaraljkaškim instrumentima te društvenim stijegom. Fotografija je objavljena u knjizi Ivana Javorčića „Žrnovnica, od davnina do danas“.",
+    images: [
+      {
+        src: "/images/archive/photos/1939/photo-01.jpg",
+        alt: "Žrnovački glazbari s instrumentima i društvenim stijegom 1. prosinca 1939. godine",
+        caption:
+          "Žrnovački glazbari, 1. prosinca 1939. godine.",
+      },
+    ],
+    source: {
+      name: "Knjiga „Žrnovnica, od davnina do danas“",
+      author: "Ivan Javorčić",
+    },
+  },
+  {
     id: "dan-drzavnosti-riva-2025",
     year: 2025,
     date: "2025-05-30",
@@ -161,14 +199,7 @@ export const archiveEntries: ArchiveEntry[] = [
     title: "Prvi zajednički koncert u Trogiru",
     description:
         "U sklopu 56. Trogirskog kulturnog ljeta Narodna glazba Trogir ugostila je HGD „Stjepan Radić“ iz Žrnovnice u Gradskoj loži. Bio je to prvi zajednički koncert dvaju društava i prvi nastup žrnovačkog orkestra u Trogiru — susret posvećen druženju, razmjeni iskustava i povezivanju dviju dugih glazbenih tradicija.",
-    images: [
-        {
-            src: "/images/archive-concert-2026.webp",
-            alt: "Zajednički koncert u Gradskoj loži u Trogiru 2026. godine",
-            caption:
-            "Prvi zajednički koncert Narodne glazbe Trogir i HGD-a „Stjepan Radić“.",
-        },
-    ],
+    images: trogir2026Images,
     source: {
         name: "Gradski radio Trogir",
         author: "A. L.",

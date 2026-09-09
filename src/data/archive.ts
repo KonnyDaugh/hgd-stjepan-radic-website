@@ -62,6 +62,22 @@ const danDrzavnostiRivaImages: ArchiveImage[] = Array.from(
   },
 );
 
+const imotski2026Images: ArchiveImage[] = Array.from(
+  { length: 8 },
+  (_, index) => {
+    const photoNumber = String(index + 1).padStart(2, "0");
+
+    return {
+      src: `/images/archive/events/imotski-2026/photo-${photoNumber}.jpg`,
+      alt: `Nastup Gradske glazbe Stjepan Radić na susretu puhačkih orkestara u Imotskom, fotografija ${
+        index + 1
+      }`,
+      caption:
+        "15. susret puhačkih orkestara Splitsko-dalmatinske županije, Imotski, 26. travnja 2026.",
+    };
+  },
+);
+
 export const archiveEntries: ArchiveEntry[] = [
   {
     id: "osnivanje-drustva",
@@ -88,27 +104,6 @@ export const archiveEntries: ArchiveEntry[] = [
             caption: "Godina snimanja još nije potvrđena.",
         },
     ],
-  },
-  {
-    id: "prvi-zajednicki-koncert-trogir-2026",
-    year: 2026,
-    categories: ["fotografije", "koncerti", "gostovanja"],
-    eyebrow: "Koncerti · Gostovanja",
-    title: "Prvi zajednički koncert u Trogiru",
-    description:
-        "U sklopu 56. Trogirskog kulturnog ljeta Narodna glazba Trogir ugostila je HGD „Stjepan Radić“ iz Žrnovnice u Gradskoj loži. Bio je to prvi zajednički koncert dvaju društava i prvi nastup žrnovačkog orkestra u Trogiru — susret posvećen druženju, razmjeni iskustava i povezivanju dviju dugih glazbenih tradicija.",
-    images: [
-        {
-            src: "/images/archive-concert-2026.webp",
-            alt: "Zajednički koncert u Gradskoj loži u Trogiru 2026. godine",
-            caption:
-            "Prvi zajednički koncert Narodne glazbe Trogir i HGD-a „Stjepan Radić“.",
-        },
-    ],
-    source: {
-        name: "Gradski radio Trogir",
-        author: "A. L.",
-    },
   },
   {
     id: "arhivski-dokument-1939",
@@ -146,5 +141,37 @@ export const archiveEntries: ArchiveEntry[] = [
     description:
       "HGD „Stjepan Radić“ nastupio je 30. svibnja 2025. na splitskoj Rivi povodom Dana državnosti Republike Hrvatske. Fotografije bilježe trenutke s nastupa orkestra u središtu Splita.",
     images: danDrzavnostiRivaImages,
+  },
+  {
+    id: "plasman-na-drzavnu-smotru-2026",
+    year: 2026,
+    date: "2026-04-26",
+    categories: ["fotografije", "koncerti"],
+    eyebrow: "Koncerti · Smotra",
+    title: "Plasman na državnu smotru",
+    description:
+      "Gradska glazba „Stjepan Radić“ Žrnovnica ostvarila je izvrstan rezultat na 15. susretu puhačkih orkestara Splitsko-dalmatinske županije, održanom 26. travnja 2026. u Imotskom. Izvedbom u slobodnoj koncertnoj kategoriji orkestar je izborio plasman na 39. Susret hrvatskih puhačkih orkestara, zakazan za 6. i 7. lipnja 2026. u Zagrebu.",
+    images: imotski2026Images,
+  },
+  {
+    id: "prvi-zajednicki-koncert-trogir-2026",
+    year: 2026,
+    categories: ["fotografije", "koncerti", "gostovanja"],
+    eyebrow: "Koncerti · Gostovanja",
+    title: "Prvi zajednički koncert u Trogiru",
+    description:
+        "U sklopu 56. Trogirskog kulturnog ljeta Narodna glazba Trogir ugostila je HGD „Stjepan Radić“ iz Žrnovnice u Gradskoj loži. Bio je to prvi zajednički koncert dvaju društava i prvi nastup žrnovačkog orkestra u Trogiru — susret posvećen druženju, razmjeni iskustava i povezivanju dviju dugih glazbenih tradicija.",
+    images: [
+        {
+            src: "/images/archive-concert-2026.webp",
+            alt: "Zajednički koncert u Gradskoj loži u Trogiru 2026. godine",
+            caption:
+            "Prvi zajednički koncert Narodne glazbe Trogir i HGD-a „Stjepan Radić“.",
+        },
+    ],
+    source: {
+        name: "Gradski radio Trogir",
+        author: "A. L.",
+    },
   },
 ];

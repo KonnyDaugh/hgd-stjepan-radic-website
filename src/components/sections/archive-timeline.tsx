@@ -3,10 +3,12 @@
 import { useState } from "react";
 
 import { Container } from "@/components/ui/container";
-import {archiveCategories, archiveEntries} from "@/data/archive";
-import type { ArchiveCategoryId } from "@/data/archive";
-
 import { ArchiveGallery } from "@/components/ui/archive-gallery";
+import {
+  archiveCategories,
+  archiveEntries,
+} from "@/data/archive";
+import type { ArchiveCategoryId } from "@/data/archive";
 
 const archiveDateFormatter = new Intl.DateTimeFormat("hr-HR", {
   day: "numeric",
@@ -19,19 +21,35 @@ export function ArchiveTimeline() {
   const [activeCategory, setActiveCategory] =
     useState<ArchiveCategoryId>("sve");
 
-    const visibleEntries =
-        activeCategory === "sve"
-        ? archiveEntries
-        : archiveEntries.filter((entry) =>
-            entry.categories.includes(activeCategory),
-            );
+  const visibleEntries =
+    activeCategory === "sve"
+      ? archiveEntries
+      : archiveEntries.filter((entry) =>
+          entry.categories.includes(activeCategory),
+        );
 
-    const filteredEntries = [...visibleEntries].sort((a, b) => {
-        if (a.year === null) return 1;
-        if (b.year === null) return -1;
+  const filteredEntries = [...visibleEntries].sort((a, b) => {
+    if (a.year === null) return 1;
+    if (b.year === null) return -1;
 
-        return a.year - b.year;
-    });
+    return a.year - b.year;
+  });
+
+  const entriesByYear = Array.from(
+    filteredEntries.reduce(
+      (groups, entry) => {
+        const entries = groups.get(entry.year) ?? [];
+
+        groups.set(entry.year, [...entries, entry]);
+
+        return groups;
+      },
+      new Map<
+        number | null,
+        (typeof filteredEntries)[number][]
+      >(),
+    ),
+  );
 
   return (
     <section
@@ -72,45 +90,51 @@ export function ArchiveTimeline() {
         </div>
 
         <div className="mt-14" aria-live="polite">
-            {filteredEntries.length > 0 ? (
-                <ol className="space-y-12 border-l border-gold pl-8 md:pl-10">
-                {filteredEntries.map((entry) => {
-                    return (
-                        <li
+          {entriesByYear.length > 0 ? (
+            <ol className="space-y-12 border-l border-gold pl-8 md:pl-10">
+              {entriesByYear.map(([year, entries]) => (
+                <li
+                  key={year ?? "undated"}
+                  className="relative grid gap-5 md:grid-cols-[100px_minmax(0,1fr)] md:gap-10"
+                >
+                  <span
+                    className="absolute -left-10 top-2 size-4 rounded-full border-2 border-gold bg-gold/20 md:-left-12"
+                    aria-hidden="true"
+                  />
+
+                  <p className="font-serif text-4xl text-gold">
+                    {year ?? "Nedatirano"}
+                  </p>
+
+                  <div className="space-y-8">
+                    {entries.map((entry) => (
+                      <article
                         key={entry.id}
-                        className="relative grid gap-5 md:grid-cols-[100px_minmax(0,1fr)] md:gap-10"
-                        >
-                        <span
-                            className="absolute -left-10 top-2 size-4 rounded-full border-2 border-gold bg-gold/20 md:-left-12"
-                            aria-hidden="true"
-                        />
+                        className="overflow-hidden rounded-lg border border-gold/50 bg-cream"
+                      >
+                        <div className="relative aspect-4/3 overflow-hidden sm:aspect-16/6 lg:aspect-5/1">
+                          <ArchiveGallery images={entry.images} />
+                        </div>
 
-                        <p className="font-serif text-4xl text-gold">
-                            {entry.year ?? "Nedatirano"}
-                        </p>
+                        <div className="p-6 sm:p-8">
+                          <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2">
+                            <p className="text-xs font-semibold uppercase tracking-widest text-gold">
+                              {entry.eyebrow}
+                            </p>
 
-                        <article className="overflow-hidden rounded-lg border border-gold/50 bg-cream">
-                          <div className="relative aspect-4/3 overflow-hidden sm:aspect-16/6 lg:aspect-5/1">
-                            <ArchiveGallery images={entry.images} />
+                            {entry.date && (
+                              <time
+                                dateTime={entry.date}
+                                className="text-sm text-charcoal/55"
+                              >
+                                {archiveDateFormatter.format(
+                                  new Date(
+                                    `${entry.date}T00:00:00Z`,
+                                  ),
+                                )}
+                              </time>
+                            )}
                           </div>
-
-                          <div className="p-6 sm:p-8">
-                            <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2">
-                              <p className="text-xs font-semibold uppercase tracking-widest text-gold">
-                                {entry.eyebrow}
-                              </p>
-
-                              {entry.date && (
-                                <time
-                                  dateTime={entry.date}
-                                  className="text-sm text-charcoal/55"
-                                >
-                                  {archiveDateFormatter.format(
-                                    new Date(`${entry.date}T00:00:00Z`),
-                                  )}
-                                </time>
-                              )}
-                            </div>
 
                           <h3 className="mt-3 font-serif text-3xl text-burgundy">
                             {entry.title}
@@ -121,15 +145,16 @@ export function ArchiveTimeline() {
                           </p>
                         </div>
                       </article>
-                    </li>
-                    )
-                })}
-                </ol>
-            ) : (
-                <p className="rounded-lg border border-gold/50 bg-cream p-10 text-center text-charcoal/65">
-                Trenutačno nema zapisa u ovoj kategoriji.
-                </p>
-            )}
+                    ))}
+                  </div>
+                </li>
+              ))}
+            </ol>
+          ) : (
+            <p className="rounded-lg border border-gold/50 bg-cream p-10 text-center text-charcoal/65">
+              Trenutačno nema zapisa u ovoj kategoriji.
+            </p>
+          )}
         </div>
       </Container>
     </section>

@@ -8,6 +8,13 @@ import type { ArchiveCategoryId } from "@/data/archive";
 
 import { ArchiveGallery } from "@/components/ui/archive-gallery";
 
+const archiveDateFormatter = new Intl.DateTimeFormat("hr-HR", {
+  day: "numeric",
+  month: "long",
+  year: "numeric",
+  timeZone: "UTC",
+});
+
 export function ArchiveTimeline() {
   const [activeCategory, setActiveCategory] =
     useState<ArchiveCategoryId>("sve");
@@ -83,24 +90,37 @@ export function ArchiveTimeline() {
                         </p>
 
                         <article className="overflow-hidden rounded-lg border border-gold/50 bg-cream">
-                            <div className="relative aspect-4/3 overflow-hidden sm:aspect-16/6 lg:aspect-5/1">
-                                <ArchiveGallery images={entry.images}/>
+                          <div className="relative aspect-4/3 overflow-hidden sm:aspect-16/6 lg:aspect-5/1">
+                            <ArchiveGallery images={entry.images} />
+                          </div>
+
+                          <div className="p-6 sm:p-8">
+                            <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2">
+                              <p className="text-xs font-semibold uppercase tracking-widest text-gold">
+                                {entry.eyebrow}
+                              </p>
+
+                              {entry.date && (
+                                <time
+                                  dateTime={entry.date}
+                                  className="text-sm text-charcoal/55"
+                                >
+                                  {archiveDateFormatter.format(
+                                    new Date(`${entry.date}T00:00:00Z`),
+                                  )}
+                                </time>
+                              )}
                             </div>
 
-                            <div className="p-6 sm:p-8">
-                                <p className="text-xs font-semibold uppercase tracking-widest text-gold">
-                                    {entry.eyebrow}
-                                </p>
+                          <h3 className="mt-3 font-serif text-3xl text-burgundy">
+                            {entry.title}
+                          </h3>
 
-                                <h3 className="mt-3 font-serif text-3xl text-burgundy">
-                                    {entry.title}
-                                </h3>
-
-                                <p className="mt-4 leading-relaxed text-charcoal/75">
-                                    {entry.description}
-                                </p>
-                            </div>
-                        </article>
+                          <p className="mt-4 leading-relaxed text-charcoal/75">
+                            {entry.description}
+                          </p>
+                        </div>
+                      </article>
                     </li>
                     )
                 })}

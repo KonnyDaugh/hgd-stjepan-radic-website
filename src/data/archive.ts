@@ -30,6 +30,7 @@ export type ArchiveSource = {
 export type ArchiveEntry = {
   id: string;
   year: number | null;
+  date?: string;
   categories: ArchiveEntryCategory[];
   eyebrow: string;
   title: string;
@@ -46,6 +47,20 @@ export const archiveCategories: ArchiveCategory[] = [
   { id: "gostovanja", label: "Gostovanja" },
   { id: "ljudi", label: "Ljudi" },
 ];
+
+const danDrzavnostiRivaImages: ArchiveImage[] = Array.from(
+  { length: 12 },
+  (_, index) => {
+    const photoNumber = String(index + 1).padStart(2, "0");
+
+    return {
+      src: `/images/archive/events/dan-drzavnosti-riva-2025/photo-${photoNumber}.jpg`,
+      alt: `Nastup HGD-a „Stjepan Radić“ na splitskoj Rivi povodom Dana državnosti 2025., fotografija ${index + 1}`,
+      caption:
+        "Nastup na splitskoj Rivi povodom Dana državnosti, 30. svibnja 2025.",
+    };
+  },
+);
 
 export const archiveEntries: ArchiveEntry[] = [
   {
@@ -94,5 +109,42 @@ export const archiveEntries: ArchiveEntry[] = [
         name: "Gradski radio Trogir",
         author: "A. L.",
     },
-    },
+  },
+  {
+    id: "arhivski-dokument-1939",
+    year: 1939,
+    categories: ["dokumenti"],
+    eyebrow: "Dokumenti",
+    title: "Zahtjev društva iz 1939. godine",
+    description:
+      "Arhivska korespondencija datirana 19. veljače 1939. godine odnosi se na službeni zahtjev Hrvatskog građanskog društva „Stjepan Radić“ iz Žrnovnice za odobrenje javnih glazbenih nastupa. U dokumentu se kao tajnik društva navodi Ante Tolić. Pojedini detalji i naziv ustanove kojoj je zahtjev upućen još zahtijevaju arhivsku provjeru.",
+    images: [
+      {
+        src: "/images/archive/documents/document-1939/page-01.webp",
+        alt: "Prva stranica arhivskog dokumenta iz 1939. godine",
+        caption: "Prva stranica službenog zahtjeva, datirana 19. veljače 1939.",
+      },
+      {
+        src: "/images/archive/documents/document-1939/page-02.webp",
+        alt: "Druga stranica arhivskog dokumenta iz 1939. godine",
+        caption: "Druga stranica arhivske korespondencije.",
+      },
+      {
+        src: "/images/archive/documents/document-1939/page-03.webp",
+        alt: "Treća stranica arhivskog dokumenta iz 1939. godine",
+        caption: "Treća stranica arhivske korespondencije.",
+      },
+    ],
+  },
+  {
+    id: "dan-drzavnosti-riva-2025",
+    year: 2025,
+    date: "2025-05-30",
+    categories: ["fotografije", "koncerti"],
+    eyebrow: "Koncerti · Dan državnosti",
+    title: "Nastup na Rivi povodom Dana državnosti",
+    description:
+      "HGD „Stjepan Radić“ nastupio je 30. svibnja 2025. na splitskoj Rivi povodom Dana državnosti Republike Hrvatske. Fotografije bilježe trenutke s nastupa orkestra u središtu Splita.",
+    images: danDrzavnostiRivaImages,
+  },
 ];

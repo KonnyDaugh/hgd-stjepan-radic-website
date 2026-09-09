@@ -84,7 +84,7 @@ const trogir2026Images: ArchiveImage[] = Array.from(
     const photoNumber = String(index + 1).padStart(2, "0");
 
     return {
-      src: `/images/archive/events/trogir-2026/photo-${photoNumber}.jpg`,
+      src: `/images/archive/events/trogir-2026/photo-${photoNumber}.JPG`,
       alt: `Zajednički koncert Narodne glazbe Trogir i HGD-a Stjepan Radić, fotografija ${
         index + 1
       }`,

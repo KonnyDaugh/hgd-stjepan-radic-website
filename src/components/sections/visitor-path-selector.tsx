@@ -66,7 +66,7 @@ export function VisitorPathSelector() {
                         href={path.href}
                         className="group flex w-full flex-col rounded border-2 border-gold bg-gold/10 p-6 transition-all duration-300 hover:-translate-y-1 hover:bg-burgundy focus-visible:bg-burgundy focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold active:translate-y-0 active:bg-burgundy"
                         >
-                        <span className="text-xs font-semibold uppercase tracking-widest text-burgundy/60 transition-colors group-hover:text-gold group-focus-visible:text-gold group-active:text-gold">
+                        <span className="text-xs font-semibold uppercase tracking-widest text-burgundy transition-colors group-hover:text-gold group-focus-visible:text-gold group-active:text-gold">
                             {path.label}
                         </span>
 

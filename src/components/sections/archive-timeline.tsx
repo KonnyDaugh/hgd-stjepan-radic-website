@@ -140,7 +140,7 @@ export function ArchiveTimeline() {
                             {entry.date && (
                               <time
                                 dateTime={entry.date}
-                                className="text-sm text-charcoal/55"
+                                className="text-sm text-charcoal"
                               >
                                 {archiveDateFormatter.format(
                                   new Date(

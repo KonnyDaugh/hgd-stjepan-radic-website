@@ -82,9 +82,7 @@ export function VideoSection() {
                 </span>
 
                 <span className="mt-1 block text-xs text-charcoal/60 sm:text-sm sm:text-cream/70">
-                    {featuredVideo.year !== null
-                    ? `${featuredVideo.year} · Lokacija za potvrdu`
-                    : "Godina i lokacija za potvrdu"}
+                    {featuredVideo.year ?? "Arhivska snimka"}
                 </span>
                 </span>
             </button>
@@ -133,7 +131,7 @@ export function VideoSection() {
                   </span>
 
                   <span className="mt-1 block text-sm text-charcoal/60">
-                    {video.year ?? "Godina za potvrdu"}
+                    {video.year ?? "Arhivska snimka"}
                   </span>
                 </span>
               </button>

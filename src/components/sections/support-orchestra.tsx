@@ -73,7 +73,7 @@ export function SupportOrchestra() {
 
               <div className="mt-auto pt-5">
                 <p className="text-sm italic text-charcoal/60">
-                  Iznos za potvrdu
+                  Ciljani iznos bit će objavljen uskoro
                 </p>
 
                 <button
@@ -99,7 +99,7 @@ export function SupportOrchestra() {
                 </h3>
 
                 <p className="mt-5 text-sm leading-relaxed italic text-cream/60">
-                Navedene pogodnosti za potvrdu s upravom orkestra prije objave.
+                  Pogodnosti partnerstva dogovaraju se prema vrsti i opsegu podrške.
                 </p>
 
                 <ul className="mt-6 space-y-3">

@@ -3,6 +3,7 @@ import type { ReactNode } from "react";
 import Link from "next/link";
 
 import { Container } from "@/components/ui/container";
+import { siteConfig } from "@/data/site";
 
 export const metadata: Metadata = {
   title: "Pravila privatnosti | HGD Stjepan Radić",
@@ -89,8 +90,8 @@ export default function PrivacyPolicyPage() {
                 <p>
                   <strong>HGD &quot;Stjepan Radić&quot; Žrnovnica</strong>
                 </p>
-                <p>Sjedište i adresa: za potvrdu</p>
-                <p>E-mail za pitanja o privatnosti: za potvrdu</p>
+                <p>Sjedište i adresa:{siteConfig.contact.address.label}</p>
+                <p>E-mail za pitanja o privatnosti: {siteConfig.contact.email}</p>
               </address>
 
               <p className="text-sm italic">

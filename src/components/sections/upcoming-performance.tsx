@@ -78,7 +78,8 @@ export function UpcomingPerformance() {
                             <button
                             type="button"
                             disabled
-                            className="inline-flex min-h-12 items-center justify-center rounded bg-gold/15 px-5 font-semibold text-charcoal/35 disabled:cursor-not-allowed"
+                            title="Dodavanje događaja u kalendar još nije aktivirano"
+                            className="inline-flex min-h-12 items-center justify-center rounded bg-gold/15 px-5 font-semibold text-charcoal/50 disabled:cursor-not-allowed"
                             >
                             + Dodaj u kalendar
                             </button>

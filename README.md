@@ -2,7 +2,66 @@
 
 A modern, accessible website for Hrvatsko glazbeno društvo "Stjepan Radić" Žrnovnica.
 
-> Status: Work in progress.
+> Status: Deployed demo. Content review and external integrations are still in progress.
+
+## Implemented features
+
+- Responsive and accessible navigation
+- Visitor path selector: listen, join, or support
+- Upcoming performance section
+- Orchestra information and recruitment sections
+- Interactive historical timeline with category filters
+- Archive photo and document galleries
+- Image lightbox
+- News listing and individual news pages
+- Partnership and support sections
+- Video gallery
+- Contact form interface
+- Responsive design for desktop and mobile devices
+- Favicon, Open Graph image, and social metadata
+- Static production export and deployment
+
+## Planned features
+
+- Calendar event download in `.ics` format
+- Living archive submission handling
+- Contact and application form delivery
+- Partner logo management
+- Automated end-to-end testing with Playwright
+- Final content approval and publication on the official domain
+
+## Tech stack
+
+- Next.js App Router
+- React
+- TypeScript
+- Tailwind CSS
+- `next/font`
+- Static export
+- Git and GitHub
+
+## Current progress
+
+- [x] Next.js project created
+- [x] TypeScript and ESLint configured
+- [x] Tailwind CSS and project design system configured
+- [x] Project fonts added with `next/font`
+- [x] Component architecture created
+- [x] Responsive header and navigation
+- [x] Hero and visitor path selector
+- [x] Main content sections
+- [x] Interactive archive timeline
+- [x] Archive galleries and lightbox
+- [x] News section and static news pages
+- [x] Recruitment and support sections
+- [x] Croatian metadata and social sharing assets
+- [x] Responsive and accessibility testing
+- [x] Static production build
+- [x] Demo deployment
+- [ ] Calendar event download
+- [ ] Form submission backend
+- [ ] Automated end-to-end tests
+- [ ] Final content approval
 
 ## About the project
 
@@ -23,51 +82,19 @@ The public website content will be available in Croatian.
 - Provide accessible contact and application forms
 - Build a strong frontend portfolio project with production-oriented architecture
 
-## Planned features
-
-- Visitor path selector: listen, join, or support
-- Upcoming concert section
-- Calendar event download in `.ics` format
-- Interactive timeline with content filters
-- Living archive submission form
-- Orchestra recruitment section
-- Partnership and support section
-- Video gallery
-- Server-side form handling
-- Responsive and accessible navigation
-- Automated end-to-end testing
-
-## Tech stack
-
-- Next.js App Router
-- React
-- TypeScript
-- Tailwind CSS
-- Motion
-- Server Actions and Route Handlers
-- Playwright
-- Git and GitHub
-
-## Current progress
-
-- [x] Next.js project created
-- [x] TypeScript and ESLint configured
-- [x] Tailwind CSS configured
-- [x] Project color palette added
-- [x] Project fonts added with `next/font`
-- [x] Croatian document language and basic metadata configured
-- [ ] Component architecture
-- [ ] Header and navigation
-- [ ] Hero section
-- [ ] Content sections
-- [ ] Interactive functionality
-- [ ] Server-side forms
-- [ ] Automated tests
-- [ ] Production deployment
-
 ## Getting started
 
 Install dependencies:
 
 ```bash
 npm install
+
+## Start the development server:
+
+```bash
+npm run dev
+
+Create a production build:
+
+```bash
+npm run build
